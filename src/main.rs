@@ -20,11 +20,15 @@ fn main() {
         // comparing command
         match command {
             "exit" => break,
-            "list" => datalogic::print_file(),
+            "ls" => datalogic::print_file(),
             "add" => datalogic::writeln_to_file(args),
-            "remove" => datalogic::delete_line(convert_str_to_usize(args)),
-            "clear" => datalogic::clear_file(),
-            _ => datalogic::writeln_to_file(input),
+            "rm" => datalogic::delete_line(convert_str_to_usize(args)),
+            "rm-all" => datalogic::clear_file(),
+            "clear" => Ok({
+                // The line below clears the terminal screen
+                print!("\x1B[2J\x1B[1;1H");
+            }),
+            _ => Ok(println!("Invalid command")),
         }
         .expect("Operation failed successfully")
     }
