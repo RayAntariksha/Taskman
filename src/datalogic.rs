@@ -1,5 +1,5 @@
 use std::fs::{self, File, OpenOptions};
-use std::io::{Read, Write};
+use std::io::Write;
 
 #[allow(dead_code)]
 
@@ -11,10 +11,11 @@ pub fn writeln_to_file(line: &str) -> std::io::Result<()> {
 
 #[allow(dead_code)]
 pub fn print_file() -> std::io::Result<()> {
-    let mut file = File::open("data.txt")?;
-    let mut contents = String::new();
-    file.read_to_string(&mut contents)?;
-    println!("{}", contents);
+    let content = fs::read_to_string("data.txt")?;
+    let lines: Vec<&str> = content.lines().collect();
+    for (index, line) in lines.iter().enumerate() {
+        println!("{}: {}", index + 1, line);
+    }
     Ok(())
 }
 
