@@ -1,4 +1,4 @@
 # Taskman
 A simple command-line to-do application built in rust.
-This is going to use SQLite to store all the tasks, in rust this is going to be 'rusqlite'
+I do not recommend using this application as it is not yet stable and may contain bugs.
 - Current maintainer = Antariksha Ray (RayAntariksha)
