@@ -1,9 +1,11 @@
 use colored::Colorize;
+use std::fs::File;
 use std::io::{self, Write};
 
 mod datalogic;
 
-fn main() {
+fn main() -> std::io::Result<()> {
+    File::options().write(true).create(true).open("data.txt")?;
     loop {
         //This is the prompt
         print!("{}", "[TASKMAN]# ".green());
@@ -34,6 +36,7 @@ fn main() {
         }
         .expect("Operation failed successfully")
     }
+    Ok(())
 }
 // A simple function to convert string to number
 fn convert_str_to_usize(input: &str) -> usize {
