@@ -36,15 +36,11 @@ pub fn delete_line(line_number: usize) -> std::io::Result<()> {
 
     // Line numbers are usually 1-based, so check carefully
     if line_number == 0 || line_number > lines.len() {
-        return Err(std::io::Error::new(
-            std::io::ErrorKind::InvalidInput,
-            "Invalid line number",
-        ));
+        println!("Invalid Number! Run ls command to know the numbers of each task.");
     }
 
     // Remove the line (line_number - 1 because Vec is 0-based)
     lines.remove(line_number - 1);
-
     // Join the lines back into a single string with newlines
     let new_content = lines.join("\n");
 
@@ -54,6 +50,7 @@ pub fn delete_line(line_number: usize) -> std::io::Result<()> {
         .truncate(true) // clears the file
         .open("data.txt")?;
     file.write_all(new_content.as_bytes())?;
+    writeln_to_file("");
 
     Ok(())
 }
