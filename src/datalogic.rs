@@ -10,6 +10,7 @@ pub fn writeln_to_file(line: &str) -> std::io::Result<()> {
 }
 
 #[allow(dead_code)]
+
 pub fn print_file() -> std::io::Result<()> {
     let content = fs::read_to_string("data.txt")?;
     let lines: Vec<&str> = content.lines().collect();
@@ -20,6 +21,7 @@ pub fn print_file() -> std::io::Result<()> {
 }
 
 #[allow(dead_code)]
+
 pub fn clear_file() -> std::io::Result<()> {
     let file = File::options().write(true).create(true).open("data.txt")?;
     file.set_len(0)?;
@@ -27,6 +29,7 @@ pub fn clear_file() -> std::io::Result<()> {
 }
 
 #[allow(dead_code)]
+
 pub fn delete_line(line_number: usize) -> std::io::Result<()> {
     // Read the whole file into a string
     let content = fs::read_to_string("data.txt")?;

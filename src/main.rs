@@ -5,13 +5,15 @@ mod datalogic;
 
 fn main() {
     loop {
+        //This is the prompt
         print!("{}", "[TASKMAN]# ".green());
         io::stdout().flush().unwrap();
         let mut input = String::new();
+        //Taking input
         io::stdin()
             .read_line(&mut input)
             .expect("Failed to read line");
-        let input = input.trim();
+        let input: &str = input.trim();
         // Commands
         let mut parts = input.splitn(2, ' ');
         let command = parts.next().unwrap();
@@ -33,6 +35,7 @@ fn main() {
         .expect("Operation failed successfully")
     }
 }
+// A simple function to convert string to number
 fn convert_str_to_usize(input: &str) -> usize {
     match input.parse::<usize>() {
         Ok(num) => num,
