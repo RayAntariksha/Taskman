@@ -67,3 +67,36 @@ pub fn delete_line(line_number: usize) -> std::io::Result<()> {
 
     Ok(())
 }
+
+#[allow(dead_code)]
+pub fn mark_done(task: usize) -> std::io::Result<()> {
+    // Read the whole file into a string
+    let content = fs::read_to_string("data.txt")?;
+
+    // Collect all lines into a Vec
+    let mut lines: Vec<&str> = content.lines().collect();
+
+    // Line numbers are usually 1-based, so check carefully
+    if task == 0 || task > lines.len() / 2 {
+        println!("Invalid Number! Run ls command to know the numbers of each task.");
+        return Ok(());
+    }
+    let line_number = task * 2 - 1; // Adjust for the empty lines
+
+    // Mark the task as done by replacing the line with "Done"
+    lines[line_number] = "Done";
+
+    // Join the lines back into a single string with newlines
+    let new_content = lines.join("\n");
+
+    // Overwrite the file with the new content
+    let mut file = OpenOptions::new()
+        .write(true)
+        .truncate(true) // clears the file
+        .open("data.txt")?;
+    file.write_all(new_content.as_bytes())?;
+    writeln!(file, "")?; // Ensure the file ends with a newline
+
+    Ok(())
+    
+}

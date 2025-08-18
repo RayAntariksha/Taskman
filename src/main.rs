@@ -28,6 +28,15 @@ fn main() -> std::io::Result<()> {
             "add" => datalogic::writeln_to_file(args),
             "rm" => datalogic::delete_line(convert_str_to_usize(args)),
             "rm-all" => datalogic::clear_file(),
+            "md" => {
+                if args.is_empty() {
+                    println!("Please provide a task description.");
+                    Ok(())
+                } else {
+                    datalogic::mark_done(convert_str_to_usize(args));
+                    Ok(())
+                }
+            }
             "clear" => Ok({
                 // The line below clears the terminal screen
                 print!("\x1B[2J\x1B[1;1H");
