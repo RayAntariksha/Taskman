@@ -18,10 +18,15 @@ pub fn print_file() -> std::io::Result<()> {
     let mut num = 1;
     for (index, line) in lines.iter().enumerate() {
         if index % 2 == 0 {
-            println!("{}: {}", num, line);
+            let status = if index + 1 < lines.len() && lines[index + 1] == "[]" {
+                "☑️ "
+            } else {
+                "✅"
+            };
+            println!("{} {}: {}", status, num, line);
             num += 1; // Increment num for the next line
         } else {
-            continue; // Skip every second line (the empty lines)
+            continue;
         }
     }
     Ok(())

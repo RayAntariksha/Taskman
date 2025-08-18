@@ -33,7 +33,7 @@ fn main() -> std::io::Result<()> {
                     println!("Please provide a task description.");
                     Ok(())
                 } else {
-                    datalogic::mark_done(convert_str_to_usize(args));
+                    let _ = datalogic::mark_done(convert_str_to_usize(args)); // Assuming mark_done is defined in datalogic.rs
                     Ok(())
                 }
             }
